@@ -1317,9 +1317,7 @@ uae_u32 REGPARAM2 op_23c_0_comp_ff(uae_u32 opcode)
 {
 	uae_u32 m68k_pc_offset_thisinst=m68k_pc_offset;
 	m68k_pc_offset+=2;
-	uae_u8 scratchie=S1;
-	int src = scratchie++;
-	mov_l_ri(src,(uae_s32)(uae_s16)comp_get_iword((m68k_pc_offset+=2)-2));
+	 int src = (uae_s32)(uae_s16)comp_get_iword((m68k_pc_offset+=2)-2);
 	 make_flags_live();
 	 jff_ANDSR(ARM_CCR_MAP[src & 0xF], (src & 0x10));
 	 live_flags();
@@ -11184,10 +11182,10 @@ uae_u32 REGPARAM2 op_4400_0_comp_ff(uae_u32 opcode)
 	m68k_pc_offset+=2;
 	uae_u8 scratchie=S1;
 	int src=srcreg;
-	jff_NEG_b(src);
-	live_flags();
-	if (!(needed_flags & FLAG_CZNV)) dont_care_flags();
-	if (m68k_pc_offset>SYNC_PC_OFFSET) sync_m68k_pc();
+	 jff_NEG_b(src);
+	 live_flags();
+	 if (!(needed_flags & FLAG_CZNV)) dont_care_flags();
+	 if (m68k_pc_offset>SYNC_PC_OFFSET) sync_m68k_pc();
 return 0;
 }
 #endif
@@ -26463,12 +26461,12 @@ uae_u32 REGPARAM2 op_d100_0_comp_ff(uae_u32 opcode)
 	uae_u8 scratchie=S1;
 	int src=srcreg;
 	int dst=dstreg;
-	 dont_care_flags();
-	 make_flags_live();
-	 jff_ADDX_b(dst,src);
-	 live_flags();
-	 if (!(needed_flags & FLAG_CZNV)) dont_care_flags();
-	 if (m68k_pc_offset>SYNC_PC_OFFSET) sync_m68k_pc();
+	dont_care_flags();
+	//make_flags_live();
+	jff_ADDX_b(dst,src);
+	live_flags();
+	if (!(needed_flags & FLAG_CZNV)) dont_care_flags();
+	if (m68k_pc_offset>SYNC_PC_OFFSET) sync_m68k_pc();
 return 0;
 }
 /* ADDX.B -(An),-(An) */
